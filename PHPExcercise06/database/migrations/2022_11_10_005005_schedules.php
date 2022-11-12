@@ -20,6 +20,8 @@ return new class extends Migration
             $table->dateTime('end');
             $table->string('place');
             $table->string('content', 500);
+            $table->foreignId('user_id')->constrained('users'); 
+            $table->timestamps();
         });
     }
 

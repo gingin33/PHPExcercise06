@@ -13,7 +13,7 @@
             @csrf
             <div>
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
-                                {{ __('新規登録はこちら') }}
+                                {{ __('New Register') }}
                 </a>
             </div>
 
@@ -48,11 +48,11 @@
 
             <div class="flex items-center justify-end mt-4">
                 
-                @if (Route::has('password.request'))
+                <!-- @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
                         {{ __('Forgot your password?') }}
                     </a>
-                @endif
+                @endif -->
 
                 <x-primary-button class="ml-3">
                     {{ __('Log in') }}

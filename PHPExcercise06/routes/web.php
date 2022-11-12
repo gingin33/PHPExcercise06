@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ScheduleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +18,12 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', [ScheduleController::class, 'getSchedules'])->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/dashboard', [ScheduleController::class, 'getSchedules'])->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::post('/dashboard', [ScheduleController::class, 'doInsertSchedule'])->middleware(['auth', 'verified'])->name('doCreate');
+
+Route::get('/create', [ScheduleController::class, 'insertSchedule'])->middleware(['auth', 'verified'])->name('create');
 
 require __DIR__.'/auth.php';

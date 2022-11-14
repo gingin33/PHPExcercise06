@@ -22,9 +22,13 @@ Route::get('/', [ScheduleController::class, 'getSchedules'])->middleware(['auth'
 
 Route::get('/dashboard', [ScheduleController::class, 'getSchedules'])->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::post('/create/done', [ScheduleController::class, 'doInsertSchedule'])->middleware(['auth', 'verified'])->name('doCreate');
+Route::get('/weekSchedules', [ScheduleController::class, 'getWeekSchedules'])->middleware(['auth', 'verified'])->name('weekDashboard');
+
+Route::get('/monthSchedules', [ScheduleController::class, 'getMonthSchedules'])->middleware(['auth', 'verified'])->name('monthDashboard');
 
 Route::get('/create', [ScheduleController::class, 'insertSchedule'])->middleware(['auth', 'verified'])->name('create');
+
+Route::post('/create/done', [ScheduleController::class, 'doInsertSchedule'])->middleware(['auth', 'verified'])->name('doCreate');
 
 Route::get('/edit/{id}', [ScheduleController::class, 'editSchedule'])->middleware(['auth', 'verified'])->name('edit');
 

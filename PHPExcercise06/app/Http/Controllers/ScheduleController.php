@@ -9,6 +9,39 @@ use Illuminate\Support\Facades\Auth;
 
 class ScheduleController extends Controller
 {
+    public function getSchedules(){
+        $user = User::find(Auth::user()->id);
+        
+        $schedules = Schedule::where('user_id', $user->id)->oldest('begin')->get();
+        return view('dashboard', compact('schedules'));
+    }
+
+    public function getWeekSchedules(){
+        $user = User::find(Auth::user()->id);
+        
+        $schedules = Schedule::where('user_id', $user->id)
+        ->whereBetween('begin', [date("Y-m-d H:i:s"), date("Y-m-d H:i:s", strtotime("+1 week"))])
+        ->oldest('begin')
+        ->get();
+
+        return view('dashboard', compact('schedules'));
+    }
+
+    public function getMonthSchedules(){
+        $user = User::find(Auth::user()->id);
+        
+        $schedules = Schedule::where('user_id', $user->id)
+        ->whereBetween('begin', [date("Y-m-d H:i:s"), date("Y-m-d H:i:s", strtotime("+1 month"))])
+        ->oldest('begin')
+        ->get();
+
+        return view('dashboard', compact('schedules'));
+    }
+
+    public function insertSchedule(){
+        return view('crud/createSchedule');
+    }
+    
     public function doInsertSchedule(Request $request){
         $user = User::find(Auth::user()->id);
 
@@ -27,15 +60,6 @@ class ScheduleController extends Controller
 
         $schedules = Schedule::where('user_id', $user->id)->oldest('begin')->get();
         return view('dashboard', compact('schedules'));
-    }
-    public function getSchedules(){
-        $user = User::find(Auth::user()->id);
-        
-        $schedules = Schedule::where('user_id', $user->id)->oldest('begin')->get();
-        return view('dashboard', compact('schedules'));
-    }
-    public function insertSchedule(){
-        return view('crud/createSchedule');
     }
 
     public function editSchedule($id){

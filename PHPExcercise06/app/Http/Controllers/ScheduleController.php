@@ -74,7 +74,7 @@ class ScheduleController extends Controller
             'place' => 'max:100',
             'content' => 'required | max:100',
         ]);
-        Schedule::create([
+        Schedule::where('id', $request->id)->update([
             'begin' => $request->begin,
             'end' => $request->end,
             'place' => $request->place,

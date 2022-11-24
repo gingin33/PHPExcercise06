@@ -30,6 +30,7 @@
                         <x-input-label for="place" :value="__('Content')" />
                         <input class="p-2 text-sm border-1 rounded-md focus:border-gray-800 block" type="text" name="content" value="{{ $schedule->content }}"/>
                     </div>
+                    <input type="hidden" name="id" value="{{ $schedule->id }}">
                     <x-primary-button class="ml-5">{{ __('Submit') }}</x-primary-button>
                 </form> 
             </div>
